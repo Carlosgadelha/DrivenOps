@@ -1,0 +1,4 @@
+DATABASE_URL=postgresql://postgres:postgres@db_postgres_sorteioFeliz:5432/sorteioFeliz
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=sorteioFeliz

@@ -1,0 +1,43 @@
+services:
+  db_postgres_sorteio_feliz:
+    image: postgres
+    container_name: db_postgres_sorteio_feliz
+    restart: always
+    ports:
+      - 1234:5432
+    env_file:
+      - back-end/.env
+    volumes:
+      - pg_sorteio_feliz:/var/lib/postgresql/data
+
+  node_app_sorteio_feliz:
+    container_name: node_app_sorteio_feliz
+    build: ./back-end
+    ports:
+      - 5000:5000
+    depends_on:
+      - db_postgres_sorteio_feliz
+    env_file:
+      - back-end/.env
+
+  app_react:
+    build: ./front-end
+    container_name: app_react
+    volumes:
+      - build_react:/var/www/html
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - build_react:/var/www/html
+    depends_on:
+      - db_postgres_sorteio_feliz
+      - node_app_sorteio_feliz
+      - app_react
+
+volumes:
+  pg_sorteio_feliz:
+  build_react:
