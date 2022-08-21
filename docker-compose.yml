@@ -6,7 +6,7 @@ services:
     ports:
       - 1234:5432
     env_file:
-      - back-end/.env
+      - ./back-end/.env
     volumes:
       - pg_sorteio_feliz:/var/lib/postgresql/data
 
@@ -18,7 +18,7 @@ services:
     depends_on:
       - db_postgres_sorteio_feliz
     env_file:
-      - back-end/.env
+      - ./back-end/.env
 
   app_react:
     build: ./front-end
